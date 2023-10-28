@@ -10,7 +10,9 @@
 
 # production
 /build
-/hardhat
+/hardhat/node_modules
+/hardhat/cache
+
 
 # misc
 .DS_Store

@@ -1,0 +1,7 @@
+{
+  "name": "hardhat-project",
+  "dependencies": {
+    "chai": "^4.3.10",
+    "ethers": "^6.8.0"
+  }
+}
