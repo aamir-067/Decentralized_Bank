@@ -59,18 +59,18 @@ describe("AllTests", ()=>{
             const initBalance = await mycoin.balanceOf(bank.target);  // 0
 
             await mycoin.transfer(adr1.address, 1000 * (10 ** 3));
-            await bank.connect(adr1);
-            await mycoin.connect(adr1);
-            await mycoin.approve(bank.target, 1000 * (10 ** 3));
-            await bank.deposit(1000);
+            
+            await mycoin.connect(adr1).approve(bank.target, 1000 * (10 ** 3));;
+            await bank.connect(adr1).deposit(1000);
 
             const afterBalance = await mycoin.balanceOf(bank.target);  // 1000000n
-            // const depositorDetails = await bank.depositors(adr1.address);   // 1000  timestamp
+            const depositorDetails = await bank.seeDetails(adr1.address);   // 1000  timestamp
+            console.log("Cost details => ,", depositorDetails)
 
             expect(initBalance).to.equal(0n);
             expect(afterBalance).to.equal(1000000n);
-            expect(depositorDetails[0]).to.equal(100000n);
-            expect(depositorDetails[1]).lessThanOrEqual(Date.now()/100);
+            expect(depositorDetails[0]).to.equal(1000000n);
+            expect(ethers.toNumber(depositorDetails[1])).lessThanOrEqual(Date.now()/100);
         });
 
         it("can withdraw the tokens with the correct amount of reword tokens.", async()=>{
@@ -82,23 +82,22 @@ describe("AllTests", ()=>{
             // deposit tokens
             const depositTokens  = 1000000;
             await mycoin.transfer(adr1.address, 1000000 * (10 ** 3));
-            await bank.connect(adr1);
-            await mycoin.connect(adr1);
-            await mycoin.approve(bank.target, 1000000 * (10 ** 3));
-            await bank.deposit(1000000);
-
+            await mycoin.connect(adr1).approve(bank.target, 1000000 * (10 ** 3));
+            await bank.connect(adr1).deposit(1000000);
+            
 
             // calculate the reword.
             // contract will do this.
 
+            await new Promise(resolve => setTimeout(resolve, 10000));
             // withdraw the tokens.
-            await bank.withdraw(depositTokens);
+            await bank.connect(adr1).withdraw(depositTokens);
             const afterBalance = await mycoin.balanceOf(adr1.address);
             const rewordTokens = await reword.balanceOf(adr1.address);
             console.log('reword ==> ',rewordTokens);
             expect(ethers.toNumber(afterBalance)).to.equal(depositTokens * (10 ** 3));
-            expect(rewordTokens).greaterThan(0n);
+            expect(ethers.toNumber(rewordTokens)).greaterThan(0);
 
-        })
+        });
     })
 })

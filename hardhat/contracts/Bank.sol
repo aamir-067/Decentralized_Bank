@@ -30,18 +30,23 @@ contract Bank{
         // IERC20(mycoin).approve(address(this), amount * (10 ** 3));
 
         IERC20(mycoin).transferFrom(msg.sender, address(this) , 1000 * (10 ** 3) );
-        depositors[msg.sender] = Info(amount * 1000, block.timestamp);  //  1000 => (10 ** 3);
+        Info memory temp = Info((amount* 1000), block.timestamp);
+        depositors[msg.sender] = temp; //  1000 => (10 ** 3);
         //todo: emit a deposit event
 
     }
 
-    function withdraw(uint256 amount, uint totalReword) public {
+    function withdraw(uint256 amount) public {
         require(amount > 0, "amount must be greater than 0");
         Info storage personDetails = depositors[msg.sender];
-        require(amount <= personDetails.amount , "You don't have enough tokens to withdraw");
-        //uint totalReword = amount * (((1 + (5 / 100)) * (block.timestamp - personDetails.time)) / (24 * 3600));  // -> this will gives 5% daily of the total tokens in reword token
+        require((amount * 1000) <= personDetails.amount , "You don't have enough tokens to withdraw");
 
-        // send the mycoin first.
+        // calculate reword 
+        uint x = ((amount * 1000) * 5)/100;
+        uint y = (block.timestamp - personDetails.time) / (3600 * 24);
+        uint totalReword = x * y;
+
+        // send the mycoin first
         IERC20(mycoin).transfer(msg.sender, amount);
         personDetails.amount -= amount;
 
@@ -53,8 +58,8 @@ contract Bank{
             IERC20(reword).transfer(msg.sender, totalReword);
             remainingReword -= totalReword;
         }
-
     }
+
     modifier onlyOwner() {
         require(msg.sender == owner , "only owner can call this function");
         _;
@@ -63,8 +68,12 @@ contract Bank{
     function depositRewordToken(uint amount) public onlyOwner {
         // IERC20(reword).approve(address(this), amount * (10**3));
         IERC20(reword).transferFrom(msg.sender,address(this) , amount * (10**3));
-        remainingReword += amount * (10**3);
+        remainingReword += amount * 1000;
 
     }
 
+
+    function seeDetails(address _peer) public view returns(Info memory){
+        return depositors[_peer];
+    }
 }
