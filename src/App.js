@@ -1,9 +1,11 @@
-import Navbar from "./components/Navbar";
+import { Outlet } from "react-router-dom";
+import { Footer, Home, Navbar, Stack, Withdraw} from "./components/index";
 function App() {
   return (
     <div className="App">
       <Navbar/>
-      <h3 className="text-green-300 bg-red-100 p-10">hello</h3>
+      <Outlet/>
+      <Footer/>
     </div>
   );
 }
