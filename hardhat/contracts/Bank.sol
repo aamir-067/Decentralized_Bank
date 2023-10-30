@@ -10,6 +10,7 @@ contract Bank{
     address reword;
     address mycoin;
     address owner;
+    uint public totalStakedAmount;
     uint public remainingReword;
 
     mapping(address => Info) public depositors;
@@ -30,8 +31,13 @@ contract Bank{
         // IERC20(mycoin).approve(address(this), amount * (10 ** 3));
 
         IERC20(mycoin).transferFrom(msg.sender, address(this) , 1000 * (10 ** 3) );
-        Info memory temp = Info((amount* 1000), block.timestamp);
+
+        Info memory prevRecord = depositors[msg.sender];
+        uint avgTime = (block.timestamp + prevRecord.time)/2;
+
+        Info memory temp = Info((amount* 1000) + prevRecord.amount, avgTime);
         depositors[msg.sender] = temp; //  1000 => (10 ** 3);
+        totalStakedAmount += amount;
         //todo: emit a deposit event
 
     }
@@ -65,7 +71,7 @@ contract Bank{
         _;
     }
     
-    function depositRewordToken(uint amount) public onlyOwner {
+    function depositRewordToken(uint amount) public onlyOwner { 
         // IERC20(reword).approve(address(this), amount * (10**3));
         IERC20(reword).transferFrom(msg.sender,address(this) , amount * (10**3));
         remainingReword += amount * 1000;

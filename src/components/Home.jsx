@@ -1,7 +1,10 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useLoaderData } from 'react-router-dom'
+import { fetchTotalTokens } from '../utils';
 
 const Home = () => {
+  const tokensCount = useLoaderData();  // i used loader to fetch the totalStacked Tokens
+
   return (
     <div className="relative w-full bg-white">
       <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
@@ -18,6 +21,7 @@ const Home = () => {
           <p className="mt-8 text-lg text-gray-700">
             Stack myCoin tokens and earn a daily reword of Reword (RWD) tokens at <strong>5% daily</strong> of the total tokens stacked in the Bank
           </p>
+          <h2 className='my-4 font-bold text-lg'>Tokens staked : {tokensCount}</h2>
           <div className='my-6'>
               <NavLink
                 to={"/stack"}

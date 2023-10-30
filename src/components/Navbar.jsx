@@ -1,7 +1,24 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
+import { initWeb3 } from '../utils'
+import {useSelector, useDispatch} from "react-redux";
+import { web3Reset } from '../features';
 const Navbar = () => {
+  const {signer} = useSelector((state) => state.web3Api);
+  const {web3Api} = useSelector((state) => state);
+
+console.log(web3Api);
+
+  const dispatch = useDispatch();
+
+const handleConnect = async ()=>{
+  if(!signer){
+    await initWeb3();
+  }else{
+    dispatch(web3Reset({signer : null, provider : null, bank : null, mycoin : null, reword : null}));
+  }
+}
+
   return (
     <div className="relative w-full bg-white">
   <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -44,12 +61,13 @@ const Navbar = () => {
     <div className=" lg:block">
       <div className=' flex justify-between items-center gap-3'>
       <button
+      onClick={async()=>{await handleConnect()}}
         type="button"
-        className="rounded-md order-2 bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        className={`rounded-md order-2 border-2 border-black  ${signer?.address ? "text-black bg-white" : "bg-black text-white"} px-3 py-2 text-sm font-semibold shadow-sm hover:bg-black hover:text-white ease-in-out duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
       >
-        connect wallet
+        {signer?.address ? "Log out" : "connect wallet"}
       </button>
-      <p className='order-1'>0x000000.....</p>
+      <p className='order-1 text-sm font-sans font-bold'>{signer?.address ? `${[...signer.address].slice(0,5).join("")}...${[...signer.address].slice(37,42).join("")}` : ""}</p>
       </div>
     </div>
 
