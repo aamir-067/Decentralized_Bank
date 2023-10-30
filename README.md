@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Decentralized Bank Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This is a decentralized bank project where you can stake MYTOKEN (MTK) tokens and earn a reward at the speed of 5% daily of the total tokens spent in the form of REWARD (RWD) tokens. Both tokens are created by the author, and you can change the token in the Hardhat directory.
 
-In the project directory, you can run:
 
-### `npm start`
+The project is almost done but needs some modifications for better performance. It uses React.js, Ethers.js, Tailwind CSS, Hardhat, Solidity, and Redux Toolkit for state management. The token creation uses the OpenZeppelin library for contract creation, and the contracts are currently deployed on the Ethereum test network Sepolia.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![this is hero image of the project](/dapp-project/public/hero.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features:
 
-### `npm test`
+- Stake MTK tokens to earn RWD tokens
+- Unstake MTK tokens at any time
+- View your staked MTK tokens and earned RWD tokens
+- Withdraw your RWD tokens at any time
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Getting Started:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Clone the repository: `git clone https://github.com/your-username/decentralized-bank-project.git`
+- Install the dependencies: `npm install`
+- Start the development server: npm start
+- Open your browser and navigate to http://localhost:3000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage:
 
-### `npm run eject`
+- To stake MTK tokens, click the "Stake" button and enter the amount of MTK you want to stake.
+- To unstake MTK tokens, click the "Unstake" button and enter the amount of MTK you want to unstake.
+- To view your staked MTK tokens and earned RWD tokens, click the "My Account" button.
+- To withdraw your RWD tokens, click the "Withdraw" button and enter the amount of RWD you want to withdraw.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![this is withdraw page image of the project](/dapp-project/public/other.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Deployment:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- To deploy the contracts to the Ethereum test network Sepolia, run the following command: `npx hardhat deploy --network sepolia`
 
-## Learn More
+## Contributing:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Fork the repository.
+2. Make your changes.
+3. Commit your changes and push them to your fork.
+4. Create a pull request.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## License:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is licensed under the MIT License.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
