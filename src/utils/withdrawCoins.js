@@ -21,7 +21,7 @@ export const withdrawCoins = async ({tokenAmount}) =>{
             console.log('=====>',ethers.toNumber(usrDetails[0]));
 
             const res = await web3Api.bank.withdraw(tokenAmount);
-            await res.wait();
+            // await res.wait();
             return true;
 
         }else{

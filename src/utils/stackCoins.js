@@ -13,7 +13,6 @@ export const stackCoins = async ({tokenAmount}) =>{
                 return;
             }
             
-            
             const approval = await web3Api.mycoin.approve(web3Api.bank.target, tokenAmount * (10 ** 3));
             await approval.wait();
             const transfer = await web3Api.bank.deposit(tokenAmount);

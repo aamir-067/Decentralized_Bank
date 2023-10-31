@@ -1,5 +1,6 @@
 # Decentralized Bank Project
 
+## Warning : There is some issues in the contracts so be careful use it.
 
 This is a decentralized bank project where you can stake MYTOKEN (MTK) tokens and earn a reward at the speed of 5% daily of the total tokens spent in the form of REWARD (RWD) tokens. Both tokens are created by the author, and you can change the token in the Hardhat directory.
 

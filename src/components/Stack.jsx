@@ -7,7 +7,7 @@ function Stack() {
 
   const {signer} = useSelector(state => state.web3Api);
 
-  const handleStack = async (e)=>{
+  const handleStack = async (e = {preventDefault : ()=>{}})=>{
     e.preventDefault();
     const value = tokensCount.current.value;
     const res = await stackCoins({tokenAmount : Number(value)});
@@ -16,7 +16,7 @@ function Stack() {
     }
   }
 
-  const handleDeposit = async (e) =>{
+  const handleDeposit = async (e = {preventDefault : ()=>{}}) =>{
     e.preventDefault();
     const value = adminTokenCount.current.value;
     const res = await depositReword({tokenAmount : Number(value)});
@@ -58,6 +58,7 @@ function Stack() {
                 
               <div>
                 <button
+                onClick={handleStack}
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
@@ -71,7 +72,7 @@ function Stack() {
           <form onSubmit={(e)=>{handleDeposit(e)}} className="mt-8">
             <div className="space-y-5">
               <div>
-                <label htmlFor="" className="text-base font-medium text-gray-900">
+                <label className="text-base font-medium text-gray-900">
                   Enter reword Token Amount to deposit
                 </label>
                 <div className="mt-2">
@@ -86,6 +87,7 @@ function Stack() {
                 
               <div>
                 <button
+                onClick={handleDeposit}
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
